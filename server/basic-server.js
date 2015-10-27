@@ -59,12 +59,25 @@ app.get('/classes/:room', function(req, res) {
       return val;
     }
   });
-  res.send({results: filter});
+  res.json({results: filter});
   res.end();
 });
 
 app.post('/send', function (req, res) {
-  storage.push(req.body);
+  var data = req.body;
+  data.createdAt = new Date();
+  storage.push(data);
+  //res.send("Success")
+  res.status(201);
+  res.end();
+  //console.log(req.body);
+});
+
+app.post('/classes/:room', function (req, res) {
+  var data = req.body;
+  data.createdAt = new Date();
+  data.roomname = req.params.room;
+  storage.push(data);
   //res.send("Success")
   res.status(201);
   res.end();
