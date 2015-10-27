@@ -13,13 +13,21 @@ this file and include it in basic-server.js so that it actually works.
 **************************************************************/
 var messages = [];
 
-var router = function(request, response) {
-  //check for 'type' if GET
-  if( request.method === 'GET') {
-    //stringify messages and send back
-    JSON.stringify(messages);
+var parseMessage = function (data) {
+  var dataObject = parseJSON(data);
+  dataObject.createdAt = new Date();
+  messages.push(dataObject);
+}
+
+
+
+var router = function(url, cb) {
+  if (method === 'GET') {
+    cb();
   }
-  //
+  if (method === 'POST') {
+
+  }
 };
 
 var requestHandler = function(request, response) {
