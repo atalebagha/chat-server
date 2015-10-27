@@ -1,29 +1,63 @@
 /* Import node's http module: */
 var http = require("http");
 var reqHandler = require("./request-handler.js");
+var express = require('express');
+
+
+var app = express();
+var router = express.Router();
+
+
+var server = app.listen(3000, "127.0.0.1", function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+
+app.use('/', router);
+
+router.get('/classes/messages', function (req, res, next) {
+  res.status(200);
+  next();
+});
+
+router.get('/log', function (req, res, next) {
+  res.status(200);
+  res.send("Hello World");
+  next();
+});
+
+router.get('/classes/:room', function (req, res, next) {
+  res.status(200)
+});
+
+
+
+
 
 // Every server needs to listen on a port with a unique number. The
 // standard port for HTTP servers is port 80, but that port is
 // normally already claimed by another server and/or not accessible
 // so we'll use a standard testing port like 3000, other common development
-// ports are 8080 and 1337.
-var port = 3000;
+// // ports are 8080 and 1337.
+// var port = 3000;
 
-// For now, since you're running this server on your local machine,
-// we'll have it listen on the IP address 127.0.0.1, which is a
-// special address that always refers to localhost.
-var ip = "127.0.0.1";
+// // For now, since you're running this server on your local machine,
+// // we'll have it listen on the IP address 127.0.0.1, which is a
+// // special address that always refers to localhost.
+// var ip = "127.0.0.1";
 
 
 
-// We use node's http module to create a server.
-//
-// The function we pass to http.createServer will be used to handle all
-// incoming requests.
-// After creating the server, we will tell it to listen on the given port and IP. */
-var server = http.createServer(reqHandler.requestHandler);
-console.log("Listening on http://" + ip + ":" + port);
-server.listen(port, ip);
+// // We use node's http module to create a server.
+// //
+// // The function we pass to http.createServer will be used to handle all
+// // incoming requests.
+// // After creating the server, we will tell it to listen on the given port and IP. */
+// var server = http.createServer(reqHandler.requestHandler);
+// console.log("Listening on http://" + ip + ":" + port);
+// server.listen(port, ip);
 
 // To start this server, run:
 //

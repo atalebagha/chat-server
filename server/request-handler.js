@@ -11,6 +11,33 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+// var express = require('express')
+// var app = express();
+
+// var router = express.Router();;
+
+// module.exports = {
+
+//   app.get('/log', function (req, res, next) {
+//     res.status(200);
+//     res.send("Hello World");
+//     next();
+//   }),
+
+//   app.get('/classes/:room', function (req, res, next) {
+//     res.status(200)
+//   }),
+
+//   app.get('/classes/messages', function (req, res, next) {
+//     res.status(200);
+//     next();
+//   })
+// }
+
+
+
+
+
 var messages = [];
 
 var parseMessage = function (data) {
@@ -41,7 +68,9 @@ var requestHandler = function(request, response) {
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
   for (var key in request) {
-    if (typeof request[key] === 'string') console.log(key + " : " + request[key])
+    if (typeof request[key] !== "object" || typeof request[key] !== 'function') {
+      console.log(key + " : " + request[key])
+    }
   };
 
   console.log("Serving request type " + request.method + " for url " + request.url);
