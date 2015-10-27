@@ -22,12 +22,7 @@ var parseMessage = function (data) {
 
 
 var router = function(url, cb) {
-  if (method === 'GET') {
-    cb();
-  }
-  if (method === 'POST') {
 
-  }
 };
 
 var requestHandler = function(request, response) {
@@ -51,6 +46,9 @@ var requestHandler = function(request, response) {
 
   console.log("Serving request type " + request.method + " for url " + request.url);
 
+  // GET
+
+
 
   // The outgoing status.
   var statusCode = 200;
@@ -67,6 +65,12 @@ var requestHandler = function(request, response) {
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
   response.writeHead(statusCode, headers);
+
+  for (var key in response) {
+    if (typeof response[key] !== "object" || typeof response[key] !== 'function') {
+      console.log(key+" : "+response[key]);
+    }
+  }
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
