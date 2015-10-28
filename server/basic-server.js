@@ -49,6 +49,12 @@ var server = app.listen(port, ip, function () {
 // })
 
 //app.METHOD( URL , CB )
+//
+// app.all('/', function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, Null, X-Requested-With, Content-Type, Acceptß");
+//   next();
+//  });
 
 app.get('/classes/messages' , function (req, res, next) {
   res.send({results: storage});
